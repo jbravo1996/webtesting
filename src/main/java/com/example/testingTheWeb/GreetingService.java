@@ -1,4 +1,4 @@
-package com.example.testingweb;
+package com.example.testingTheWeb;
 
 import org.springframework.stereotype.Service;
 

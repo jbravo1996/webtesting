@@ -1,4 +1,4 @@
-package com.example.testingweb;
+package com.example.testingTheWeb;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
