@@ -14,7 +14,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest
 public class WebLayerTest {
 
-	@Autowired
+	@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    @Autowired
 	private MockMvc mockMvc;
 
 	@Test
