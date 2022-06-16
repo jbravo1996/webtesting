@@ -7,18 +7,27 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5'))
     }
     stages {
-        stage('Build') {
+        stage('Test') {
             steps {
-               sh "./gradlew test assemble check"
+               sh "./gradlew clean test check"
             }
         
           post {
                 success {
                     junit 'build/test-results/test/*.xml'
-                    archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint:true, followSymlinks:false
                     jacoco()
-
                     recordIssues enabledForFailure: true, tool: pmdParser(pattern: 'build/reports/pmd/*.xml')
+                }
+            }
+        }
+
+        stage('Build'){
+            steps{
+                sh "./gradlew assemble"
+            }
+            post {
+                success{
+                    archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint:true, followSymlinks:false
                 }
             }
         }
