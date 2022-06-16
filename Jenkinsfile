@@ -17,6 +17,7 @@ pipeline {
                     junit 'build/test-results/test/*.xml'
                     archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint:true, followSymlinks:false
                     jacoco()
+                    pmd()
                 }
             }
         }
