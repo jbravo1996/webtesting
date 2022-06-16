@@ -18,7 +18,7 @@ pipeline {
                     archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint:true, followSymlinks:false
                     jacoco()
 
-                    recordIssues enabledForFailure: true, tool: pmdParser(pattern: 'build/reports/pmd/main.xml')
+                    recordIssues enabledForFailure: true, tool: pmdParser(pattern: 'build/reports/pmd/*.xml')
                 }
             }
         }
