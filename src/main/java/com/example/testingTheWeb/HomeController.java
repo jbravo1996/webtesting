@@ -17,6 +17,12 @@ public class HomeController {
 			@RequestParam(value = "b", defaultValue = "0") Float b
 
 	){
+		if(a==0){
+			return b;
+		}
+		if(b==0){
+			return a;
+		}
 		return a+b;
 	}
 
