@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-               sh "./gradlew clean test check"
+               sh "./gradlew clean test check pitest"
             }
         
           post {
@@ -17,6 +17,7 @@ pipeline {
                     junit 'build/test-results/test/*.xml'
                     jacoco()
                     recordIssues enabledForFailure: true, tool: pmdParser(pattern: 'build/reports/pmd/*.xml')
+                    recordIssues(tools: [(pattern: 'build/reports/pitest/*.xml')])
                 }
             }
         }
