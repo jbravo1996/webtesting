@@ -27,7 +27,8 @@ public class HttpRequestTest {
 		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",
 				String.class)).contains("Hello, World");
 	}
-    public void greetingTestService() throws Exception {
+    @Test
+	public void greetingTestService() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/greeting",
                 String.class)).contains("Hello, World");
     }
