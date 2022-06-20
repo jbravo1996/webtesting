@@ -9,10 +9,10 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-               sh "./gradlew clean test check pitest"
+                sh "./gradlew clean test check pitest"
             }
-        
-          post {
+
+            post {
                 success {
                     junit 'build/test-results/test/*.xml'
                     jacoco()
@@ -22,28 +22,28 @@ pipeline {
             }
         }
 
-        stage('Build'){
-            steps{
+        stage('Build') {
+            steps {
                 sh "./gradlew assemble"
             }
             post {
-                success{
-                    archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint:true, followSymlinks:false
+                success {
+                    archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true, followSymlinks: false
                 }
             }
         }
 
         stage('SonarQube analysis') {
-    withSonarQubeEnv() { // Will pick the global server connection you have configured
-      sh './gradlew sonarqube'
-    }
+            withSonarQubeEnv(credentialsId: 'adc7cf79-f4fb-4fe4-a7ae-f4f53cac631a') { // Will pick the global server connection you have configured
+                sh './gradlew sonarqube'
+            }
         }
-        
-        stage('Publish'){
+
+        stage('Publish') {
             steps {
                 sshagent(['ssh-gitkey']) {
-                sh 'git tag BUILD-1.0.${BUILD_NUMBER}'
-                sh 'git push --tags'
+                    sh 'git tag BUILD-1.0.${BUILD_NUMBER}'
+                    sh 'git push --tags'
                 }
             }
         }
