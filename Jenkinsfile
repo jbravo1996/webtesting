@@ -44,8 +44,9 @@ pipeline {
 
         stage('Gradle registry git') {
             steps {
-                sh './gradlew publish'
-
+                withCredentials([usernamePassword(credentialsId: 'user_and_pass_gradle_publish', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                    sh './gradlew publish'
+                }
             }
         }
 
