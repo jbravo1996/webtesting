@@ -60,7 +60,7 @@ sonarqube {
     }
 }
 
-publishing {
+ /*publishing {
     repositories {
         maven {
             name = "GitHubPackages"
@@ -76,6 +76,6 @@ publishing {
             artifact bootJar
         }
     }
-}
+} */
 
 

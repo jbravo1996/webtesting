@@ -40,17 +40,17 @@ pipeline {
                            sh './gradlew sonarqube'
                        }
                    }
-               } */
-
-        stage('Gradle registry git') {
+               }
+        */
+        /*stage('Gradle registry git') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'user_and_pass_gradle_publish', passwordVariable: 'TOKEN', usernameVariable: 'USERNAME')]) {
-                    withGradle{
+                    withGradle {
                         sh './gradlew publish'
                     }
                 }
             }
-        }
+        }*/
 
         stage('Publish') {
             steps {
