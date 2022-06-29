@@ -28,21 +28,21 @@ pipeline {
             }
             post {
                 success {
-                    archiveArtifacts artifacts: 'build/libs/*.jar', fingerprint: true, followSymlinks: false
+                    archiveArtifacts artifacts: 'build/libs/*.jar'
                 }
             }
         }
 
-        /*       stage('SonarQube analysis') {
-                   steps {
-                       withSonarQubeEnv('SonarQube') {
-                           // Will pick the global server connection you have configured
-                           sh './gradlew sonarqube'
-                       }
-                   }
-               }
-        */
-        /*stage('Gradle registry git') {
+        stage('SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    // Will pick the global server connection you have configured
+                    sh './gradlew sonarqube'
+                }
+            }
+        }
+
+        stage('Gradle registry git') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'user_and_pass_gradle_publish', passwordVariable: 'TOKEN', usernameVariable: 'USERNAME')]) {
                     withGradle {
@@ -50,7 +50,7 @@ pipeline {
                     }
                 }
             }
-        }*/
+        }
 
         stage('Publish') {
             steps {
