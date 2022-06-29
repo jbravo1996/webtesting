@@ -6,7 +6,8 @@ plugins {
     id 'jacoco'
     id 'pmd'
     id 'info.solidsoft.pitest' version '1.7.4'
-    id "org.sonarqube" version "3.4.0.2513"
+    //id "org.sonarqube" version "3.4.0.2513"
+    id("maven-publish")
 }
 
 group = 'com.example'
@@ -53,9 +54,27 @@ pitest {
     timestampedReports = false
 }
 
-sonarqube {
+/*sonarqube {
     properties {
         property "sonar.sourceEncoding", "UTF-8"
+    }
+} */
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/jbravo1996/webtesting")
+            credentials {
+                username = mvnName
+                password = mvnPass
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
     }
 }
 
